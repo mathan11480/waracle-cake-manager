@@ -1,0 +1,9 @@
+version: "3.2"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - 8282:8282
+

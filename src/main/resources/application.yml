@@ -1,0 +1,24 @@
+server:
+  port: 8282
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: c56afdcba61005319269
+            clientSecret: df37ef0d75196c1ef16c60604407ac58adfa7c75
+
+cake:
+  load:
+    server: https://gist.githubusercontent.com/hart88/198f29ec5114a3ec3460/raw/8dd19a88f9b8d24c23d9960f3300d0c917a4f07c
+    context-path: /cake.json
+
+
+

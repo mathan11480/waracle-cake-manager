@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <title>Cake Manager</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width"/>
+        <base href="/"/>
+        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+
+        <style>
+            form {
+                margin: 20px 0;
+            }
+
+            form input, button{
+                padding: 5px;
+            }
+
+            #cakes {
+              font-family: Arial, Helvetica, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+
+            #cakes td, #cakes th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+
+            #cakes tr:nth-child(even){background-color: #f2f2f2;}
+
+            #cakes tr:hover {background-color: #ddd;}
+
+            #cakes th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #4CAF50;
+              color: white;
+            }
+        </style>
+        <script type="text/javascript">
+            function addCake(cake) {
+                var cakeRow = '<tr>';
+                cakeRow += '<td>' + cake.title + '</td>';
+                cakeRow += '<td>' + cake.desc + '</td>';
+                cakeRow += '<td>' + cake.image + '</td>';
+                cakeRow += '</tr>';
+
+                $('.cakes-table-dody').append(cakeRow);
+            }
+
+            function loadCakeList() {
+                $.get("/cakes", function(cakes) {
+                    for (i = 0; i < cakes.length; i++) {
+                        addCake(cakes[i]);
+                    }
+                });
+            }
+
+            $(document).ready(function() {
+                $.ajaxSetup({
+                      xhrFields: {
+                        withCredentials: true
+                      },
+                      contentType: "application/json"
+                });
+
+                loadCakeList();
+
+                $(".add-cake").click(function() {
+                    var data = {
+                       title: $('#title').val(),
+                       desc: $('#description').val(),
+                       image: $('#image').val()
+                    };
+
+                    $.post( "/cake", JSON.stringify(data), function(cake) {
+                        addCake(cake);
+                    }).fail(function(response) {
+                        alert('Error: Please ensure the data entered is valid and not a duplicate');
+                    });
+                });
+            });
+    </script>
+
+    </head>
+
+    <body>
+        <table id="cakes">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Image Url</th>
+                </tr>
+            </thead>
+            <tbody class="cakes-table-dody">
+            </tbody>
+        </table>
+
+        <form>
+            <input type="text" id="title" placeholder="Title">
+            <input type="text" id="description" placeholder="Description">
+            <input type="text" id="image" placeholder="Image Url">
+            <input type="button" class="add-cake" value="Add Cake">
+        </form>
+    </body>
+
+</html>

@@ -1,0 +1,16 @@
+1)	Generally, I lean towards a phased, step by step approach to migration. Since this project is tiny, doesn’t have any tests, uses outdated tech stacks, and most of the coding is poor, I decided to recreate the project from scratch.
+2)	I used Github as Resource Server (Oauth2) to save some time.
+3)	Duplicate Cake entries are flagged with a warning in the log instead of throwing an exception. The feature needs to be refined further to understand how to handle it better.
+4)	New application is built using latest tech stack, namely,
+    a.	Spring Boot
+    b.	Spring Rest
+    c.	Spring Data
+    d.	Feign Client
+    e.	Spring Security
+    f. 	etc
+5)	The frontend is a simple mock implementation to showcase the integration via Rest calls. I didn’t bother adding any test to it. Ideally, it should be built using proper frontend tools.
+6)	Further, I kept all the styles and script in the same file.
+7)	I carried over the same length constraints from the old Cake entity to the new one.
+8)	Since there is no Babel, I refrained from using any ES6 syntax for backward browser compatibility.
+9)	The rest of the changes should be self-explanatory.
+10) Please refer to README.md for more information.
